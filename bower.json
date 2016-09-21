@@ -21,7 +21,7 @@
     "src"
   ],
   "dependencies": {
-    "easystarjs": "git@github.com:prettymuchbryce/easystarjs.git",
-    "phaser": "~2.0.4"
+    "phaser": "~2.0.4",
+    "easystarjs": "^0.3.0"
   }
 }

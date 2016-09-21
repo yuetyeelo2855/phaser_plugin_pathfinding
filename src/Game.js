@@ -51,13 +51,24 @@ function findPathTo(tilex, tiley) {
 
     pathfinder.setCallbackFunction(function(path) {
         path = path || [];
+        i = 0;
+        var tween = game.add.tween(sprite);
         for(var i = 0, ilen = path.length; i < ilen; i++) {
             map.putTile(46, path[i].x, path[i].y);
+            var tile = map.getTile(path[i].x, path[i].y, layer);
+            // sprite.rotation = game.physics.arcade.moveToXY(sprite, tile.worldX, tile.worldY, 60, 500);
+            // sprite.x = tile.worldX;
+            // sprite.y = tile.worldY;
+            // console.log("X: "+sprite.x+", Y:"+sprite.y);
+            tween.to({x:tile.worldX, y:tile.worldY}, 10, Phaser.Easing.Linear.In, false ,0 , 0);
+            console.log("Grid X: "+path[i].x+", Y:"+path[i].y);
+            console.log("Tile : ", map.getTile(path[i].x, path[i].y, layer));
         }
         blocked = false;
+        tween.start();
     });
-
-    pathfinder.preparePathCalculation([0,0], [tilex,tiley]);
+    var tile = map.getTileWorldXY(sprite.x, sprite.y, 32, 32, layer);
+    pathfinder.preparePathCalculation([tile.x,tile.y], [tilex,tiley]);
     pathfinder.calculatePath();
 }
 

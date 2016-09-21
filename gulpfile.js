@@ -7,6 +7,8 @@ var bower = require('gulp-bower');
 var source = 'lib/PathFinderPlugin.js';
 var uglify = require('gulp-uglify');
 
+var webserver = require('gulp-webserver');
+
 gulp.task('default', function(){
   gulp.run('build');
 });
@@ -32,4 +34,13 @@ gulp.task('minify', function() {
       .pipe(concat('phaser_pathfinding-' + config.version + '.min.js'))
       .pipe(uglify())
       .pipe(gulp.dest('bin'));
+});
+
+gulp.task('webserver', function() {
+  gulp.src('./')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: true,
+      open: true
+    }));
 });
